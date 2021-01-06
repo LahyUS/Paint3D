@@ -7,7 +7,7 @@ using SharpGL;
 using SharpGL.SceneGraph;
 
 
-namespace Paint_3D
+namespace Paint3D
 {
     class Camera
     {
@@ -15,26 +15,26 @@ namespace Paint_3D
         private float[] _target;
         private float[] _ups;
 
-        public Camera(float[] Position, float[] Target, float[] Ups)
+        public Camera(float[] position, float[] target, float[] ups)
         {
-            position = Position;
-            target = Target;
-            ups = Ups;
+            this.Position = position;
+            this.Target = target;
+            this.Ups = ups;
         }
 
-        public float[] position
+        public float[] Position
         {
             get => this._position;
             set { this._position = value; }
         }
 
-        public float[] target
+        public float[] Target
         {
             get => this._target;
             set { this._target = value; }
         }
 
-        public float[] ups
+        public float[] Ups
         {
             get => this._ups;
             set { this._ups = value; }
@@ -46,9 +46,9 @@ namespace Paint_3D
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
             gl.LoadIdentity();
             gl.LookAt(
-                position[0], position[1], position[2],
-                target[0], target[0], target[0],
-                ups[0], ups[1], ups[2]);
+                Position[0], Position[1], Position[2],
+                Target[0], Target[0], Target[0],
+                Ups[0], Ups[1], Ups[2]);
         }
     }
 }

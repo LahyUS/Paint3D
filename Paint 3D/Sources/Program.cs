@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint_3D
+namespace Paint3D
 {
     static class Program
     {

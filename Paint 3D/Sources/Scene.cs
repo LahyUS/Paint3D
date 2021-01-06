@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpGL;
 
-namespace Paint_3D
+namespace Paint3D
 {
     class Scene
     {
@@ -15,7 +15,7 @@ namespace Paint_3D
         }
 
         float alpha = 0.2f;
-        public void scene_display(OpenGL gl)
+        public void sceneDisplay(OpenGL gl)
         {
             gl.Enable(OpenGL.GL_BLEND);
             gl.BlendFunc(OpenGL.GL_SRC_ALPHA, OpenGL.GL_ONE_MINUS_SRC_ALPHA);

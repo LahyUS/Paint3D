@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{876F882F-9EBE-492D-A284-4765BB83FBED}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Paint_3D</RootNamespace>
+    <RootNamespace>Paint3D</RootNamespace>
     <AssemblyName>Paint 3D</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -35,18 +35,19 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SharpGL, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\MyFile\UNIVERSITY\Moodle\Advanced Junior\Computer Graphics\Labs\Lab_4\SharpGLTexturesSample\bin\Debug\SharpGL.dll</HintPath>
+    <Reference Include="SharpGL">
+      <HintPath>..\vendors\SharpGL.dll</HintPath>
     </Reference>
-    <Reference Include="SharpGL.SceneGraph, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\MyFile\UNIVERSITY\Moodle\Advanced Junior\Computer Graphics\Labs\Lab_4\SharpGLTexturesSample\bin\Debug\SharpGL.SceneGraph.dll</HintPath>
+    <Reference Include="SharpGL.SceneGraph">
+      <HintPath>..\vendors\SharpGL.SceneGraph.dll</HintPath>
     </Reference>
-    <Reference Include="SharpGL.WinForms, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\MyFile\UNIVERSITY\Moodle\Advanced Junior\Computer Graphics\Labs\Lab_4\SharpGLTexturesSample\bin\Debug\SharpGL.WinForms.dll</HintPath>
+    <Reference Include="SharpGL.WinForms">
+      <HintPath>..\vendors\SharpGL.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,33 +63,33 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="3D_Objects\Cube.cs" />
-    <Compile Include="3D_Objects\Object_t.cs" />
-    <Compile Include="3D_Objects\Pyramid.cs" />
-    <Compile Include="3D_Objects\Triangular_Prism.cs" />
-    <Compile Include="Camera.cs" />
-    <Compile Include="Paint3D.cs">
+    <Compile Include="Sources\3DObjects\Cube.cs" />
+    <Compile Include="Sources\3DObjects\Object.cs" />
+    <Compile Include="Sources\3DObjects\Pyramid.cs" />
+    <Compile Include="Sources\3DObjects\TriangularPrism.cs" />
+    <Compile Include="Sources\Camera.cs" />
+    <Compile Include="Sources\Paint3D.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Paint3D.Designer.cs">
+    <Compile Include="Sources\Paint3D.Designer.cs">
       <DependentUpon>Paint3D.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Sources\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scene.cs" />
-    <EmbeddedResource Include="Paint3D.resx">
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\Scene.cs" />
+    <EmbeddedResource Include="Sources\Paint3D.resx">
       <DependentUpon>Paint3D.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,12 +104,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="background.jpg" />
-    <None Include="color_button.jpg" />
-    <Content Include="Crate.bmp" />
-    <None Include="dark_bg.jpg" />
-    <None Include="download.jpg" />
+    <None Include="Resources\UI\background.jpg" />
+    <None Include="Resources\UI\color_button.jpg" />
     <Content Include="icon.ico" />
+    <Content Include="Resources\Textures\T1.bmp" />
+    <None Include="Resources\UI\dark_background.jpg" />
+    <Content Include="Resources\Textures\T2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

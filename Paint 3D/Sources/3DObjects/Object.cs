@@ -9,11 +9,11 @@ using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Lighting;
 using SharpGL.SceneGraph;
 
-namespace SharpGLTexturesSample._3D_Objects
+namespace Paint3D._3DObjects
 {
-    interface Object_t
+    interface Object
     {
-        Vertex center
+        Vertex Center
         {
             get;
             set;
@@ -37,13 +37,13 @@ namespace SharpGLTexturesSample._3D_Objects
             set;
         }
 
-        List<Vertex> Vertex_List
+        List<Vertex> VertexList
         {
             get;
             set;
         }
 
-        Texture MyTexture
+        Texture CurrentTexture
         {
             get;
             set;
@@ -51,13 +51,13 @@ namespace SharpGLTexturesSample._3D_Objects
 
         string TexturePath { get; set; }
 
-        List<Vertex> Texture_Coord
+        List<Vertex> TextureCoord
         {
             get;
             set;
         }
 
-        Color My_Color
+        Color CurrentColor
         {
             get;
             set;
@@ -81,8 +81,8 @@ namespace SharpGLTexturesSample._3D_Objects
             set;
         }
 
-        void show_Object(OpenGL gl, int type);
+        void showObject(OpenGL gl, int type);
 
-        void draw_Border(OpenGL gl, int type);
+        void drawBorder(OpenGL gl, int type);
     }
 }

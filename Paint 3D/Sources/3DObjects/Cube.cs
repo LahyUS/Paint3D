@@ -10,9 +10,9 @@ using SharpGL.SceneGraph.Lighting;
 using SharpGL.SceneGraph;
 using System.IO;
 
-namespace SharpGLTexturesSample._3D_Objects
+namespace Paint3D._3DObjects
 {
-    class Cube : Object_t
+    class Cube : Object
     {
         private Vertex _center;
         private string _name;
@@ -21,8 +21,8 @@ namespace SharpGLTexturesSample._3D_Objects
         private bool _isChoose;
         private List<Vertex> _vertexList;
         private List<Vertex> _textureCoord;
-        private Texture _texture;
-        private Color _myColor;
+        private Texture _currentTexture;
+        private Color _currentColor;
         private float[] _translate;
         private float[] _rotate;
         private float[] _scale;
@@ -51,34 +51,34 @@ namespace SharpGLTexturesSample._3D_Objects
             set { this._isChoose = value; }
         }
 
-        public Vertex center
+        public Vertex Center
         {
             get => this._center;
             set { this._center = value; }
         }
 
-        public List<Vertex> Vertex_List
+        public List<Vertex> VertexList
         {
             get => this._vertexList;
             set { this._vertexList = value; }
         }
 
-        public Texture MyTexture
+        public Texture CurrentTexture
         {
-            get => this._texture;
-            set { this._texture = value; }
+            get => this._currentTexture;
+            set { this._currentTexture = value; }
         }
 
-        public List<Vertex> Texture_Coord
+        public List<Vertex> TextureCoord
         {
             get => this._textureCoord;
             set { this._textureCoord = value; }
         }
 
-        public Color My_Color
+        public Color CurrentColor
         {
-            get => this._myColor;
-            set { this._myColor = value; }
+            get => this._currentColor;
+            set { this._currentColor = value; }
         }
 
         public float[] Translate
@@ -104,34 +104,34 @@ namespace SharpGLTexturesSample._3D_Objects
             Name = name;
             ID = id;
             IsChoose = true;
-            My_Color = color;
+            CurrentColor = color;
 
             /*****************************************************************************/
 
             // Vertex initialization
-            this.Vertex_List = new List<Vertex>();
+            this.VertexList = new List<Vertex>();
             // Bottom vertices of a cube
-            Vertex_List.Add(new Vertex(-0.5f, 0.0f, -0.5f));
-            Vertex_List.Add(new Vertex(-0.5f, 0.0f, 0.5f));
-            Vertex_List.Add(new Vertex(0.5f, 0.0f, 0.5f));
-            Vertex_List.Add(new Vertex(0.5f, 0.0f, -0.5f));
+            VertexList.Add(new Vertex(-0.5f, 0.0f, -0.5f));
+            VertexList.Add(new Vertex(-0.5f, 0.0f, 0.5f));
+            VertexList.Add(new Vertex(0.5f, 0.0f, 0.5f));
+            VertexList.Add(new Vertex(0.5f, 0.0f, -0.5f));
             // Top vertices of a cube
-            Vertex_List.Add(new Vertex(-0.5f, 1f, -0.5f));
-            Vertex_List.Add(new Vertex(-0.5f, 1f, 0.5f));
-            Vertex_List.Add(new Vertex(0.5f, 1f, 0.5f));
-            Vertex_List.Add(new Vertex(0.5f, 1f, -0.5f));
+            VertexList.Add(new Vertex(-0.5f, 1f, -0.5f));
+            VertexList.Add(new Vertex(-0.5f, 1f, 0.5f));
+            VertexList.Add(new Vertex(0.5f, 1f, 0.5f));
+            VertexList.Add(new Vertex(0.5f, 1f, -0.5f));
 
             /*****************************************************************************/
 
             // Assign texture to object's texture
-            _texture = new Texture();
+            _currentTexture = new Texture();
             _texturePath = texturePath;
             // Texture coordinate initialization
-            Texture_Coord = new List<Vertex>();
-            Texture_Coord.Add(new Vertex(0f, 0f, 0f));
-            Texture_Coord.Add(new Vertex(1f, 0f, 0f));
-            Texture_Coord.Add(new Vertex(1f, 1f, 0f));
-            Texture_Coord.Add(new Vertex(0f, 1f, 0f));
+            TextureCoord = new List<Vertex>();
+            TextureCoord.Add(new Vertex(0f, 0f, 0f));
+            TextureCoord.Add(new Vertex(1f, 0f, 0f));
+            TextureCoord.Add(new Vertex(1f, 1f, 0f));
+            TextureCoord.Add(new Vertex(0f, 1f, 0f));
 
             /*****************************************************************************/
 
@@ -147,7 +147,7 @@ namespace SharpGLTexturesSample._3D_Objects
             Scale[0] = 1f; Scale[1] = 1f; Scale[2] = 1f;
         }
 
-        public void show_Object(OpenGL gl, int type)
+        public void showObject(OpenGL gl, int type)
         {
             // If object is choosen, set the alpha equals 1 to make it solid
             // Else make it translucent
@@ -177,48 +177,48 @@ namespace SharpGLTexturesSample._3D_Objects
 
             if (_texturePath != "")
             {
-                bool is_loaded = _texture.Create(gl, _texturePath);
-                _texture.Bind(gl);
+                bool is_loaded = _currentTexture.Create(gl, _texturePath);
+                _currentTexture.Bind(gl);
             }
 
             // Render 6 face of a cube, each face is a quad
             gl.Begin(OpenGL.GL_QUADS);
             // Bottom face
-            gl.Color(My_Color.R, My_Color.G, My_Color.B, alpha);
-            gl.TexCoord(Texture_Coord[0].X, Texture_Coord[0].Y); gl.Vertex(Vertex_List[0]);
-            gl.TexCoord(Texture_Coord[1].X, Texture_Coord[1].Y); gl.Vertex(Vertex_List[1]);
-            gl.TexCoord(Texture_Coord[2].X, Texture_Coord[2].Y); gl.Vertex(Vertex_List[2]);
-            gl.TexCoord(Texture_Coord[3].X, Texture_Coord[3].Y); gl.Vertex(Vertex_List[3]);
+            gl.Color(CurrentColor.R, CurrentColor.G, CurrentColor.B, alpha);
+            gl.TexCoord(TextureCoord[0].X, TextureCoord[0].Y); gl.Vertex(VertexList[0]);
+            gl.TexCoord(TextureCoord[1].X, TextureCoord[1].Y); gl.Vertex(VertexList[1]);
+            gl.TexCoord(TextureCoord[2].X, TextureCoord[2].Y); gl.Vertex(VertexList[2]);
+            gl.TexCoord(TextureCoord[3].X, TextureCoord[3].Y); gl.Vertex(VertexList[3]);
             // Top face
-            gl.Color(My_Color.R, My_Color.G, My_Color.B, alpha);
-            gl.TexCoord(Texture_Coord[0].X, Texture_Coord[0].Y); gl.Vertex(Vertex_List[4]);
-            gl.TexCoord(Texture_Coord[1].X, Texture_Coord[1].Y); gl.Vertex(Vertex_List[5]);
-            gl.TexCoord(Texture_Coord[2].X, Texture_Coord[2].Y); gl.Vertex(Vertex_List[6]);
-            gl.TexCoord(Texture_Coord[3].X, Texture_Coord[3].Y); gl.Vertex(Vertex_List[7]);
+            gl.Color(CurrentColor.R, CurrentColor.G, CurrentColor.B, alpha);
+            gl.TexCoord(TextureCoord[0].X, TextureCoord[0].Y); gl.Vertex(VertexList[4]);
+            gl.TexCoord(TextureCoord[1].X, TextureCoord[1].Y); gl.Vertex(VertexList[5]);
+            gl.TexCoord(TextureCoord[2].X, TextureCoord[2].Y); gl.Vertex(VertexList[6]);
+            gl.TexCoord(TextureCoord[3].X, TextureCoord[3].Y); gl.Vertex(VertexList[7]);
             // Left side face
-            gl.Color(My_Color.R, My_Color.G, My_Color.B, alpha);
-            gl.TexCoord(Texture_Coord[0].X, Texture_Coord[0].Y); gl.Vertex(Vertex_List[0]);
-            gl.TexCoord(Texture_Coord[1].X, Texture_Coord[1].Y); gl.Vertex(Vertex_List[3]);
-            gl.TexCoord(Texture_Coord[2].X, Texture_Coord[2].Y); gl.Vertex(Vertex_List[7]);
-            gl.TexCoord(Texture_Coord[3].X, Texture_Coord[3].Y); gl.Vertex(Vertex_List[4]);
+            gl.Color(CurrentColor.R, CurrentColor.G, CurrentColor.B, alpha);
+            gl.TexCoord(TextureCoord[0].X, TextureCoord[0].Y); gl.Vertex(VertexList[0]);
+            gl.TexCoord(TextureCoord[1].X, TextureCoord[1].Y); gl.Vertex(VertexList[3]);
+            gl.TexCoord(TextureCoord[2].X, TextureCoord[2].Y); gl.Vertex(VertexList[7]);
+            gl.TexCoord(TextureCoord[3].X, TextureCoord[3].Y); gl.Vertex(VertexList[4]);
             // Upward side face
-            gl.Color(My_Color.R, My_Color.G, My_Color.B, alpha);
-            gl.TexCoord(Texture_Coord[0].X, Texture_Coord[0].Y); gl.Vertex(Vertex_List[0]);
-            gl.TexCoord(Texture_Coord[1].X, Texture_Coord[1].Y); gl.Vertex(Vertex_List[1]);
-            gl.TexCoord(Texture_Coord[2].X, Texture_Coord[2].Y); gl.Vertex(Vertex_List[5]);
-            gl.TexCoord(Texture_Coord[3].X, Texture_Coord[3].Y); gl.Vertex(Vertex_List[4]);
+            gl.Color(CurrentColor.R, CurrentColor.G, CurrentColor.B, alpha);
+            gl.TexCoord(TextureCoord[0].X, TextureCoord[0].Y); gl.Vertex(VertexList[0]);
+            gl.TexCoord(TextureCoord[1].X, TextureCoord[1].Y); gl.Vertex(VertexList[1]);
+            gl.TexCoord(TextureCoord[2].X, TextureCoord[2].Y); gl.Vertex(VertexList[5]);
+            gl.TexCoord(TextureCoord[3].X, TextureCoord[3].Y); gl.Vertex(VertexList[4]);
             // Right side face
-            gl.Color(My_Color.R, My_Color.G, My_Color.B, alpha);
-            gl.TexCoord(Texture_Coord[0].X, Texture_Coord[0].Y); gl.Vertex(Vertex_List[1]);
-            gl.TexCoord(Texture_Coord[1].X, Texture_Coord[1].Y); gl.Vertex(Vertex_List[2]);
-            gl.TexCoord(Texture_Coord[2].X, Texture_Coord[2].Y); gl.Vertex(Vertex_List[6]);
-            gl.TexCoord(Texture_Coord[3].X, Texture_Coord[3].Y); gl.Vertex(Vertex_List[5]);
+            gl.Color(CurrentColor.R, CurrentColor.G, CurrentColor.B, alpha);
+            gl.TexCoord(TextureCoord[0].X, TextureCoord[0].Y); gl.Vertex(VertexList[1]);
+            gl.TexCoord(TextureCoord[1].X, TextureCoord[1].Y); gl.Vertex(VertexList[2]);
+            gl.TexCoord(TextureCoord[2].X, TextureCoord[2].Y); gl.Vertex(VertexList[6]);
+            gl.TexCoord(TextureCoord[3].X, TextureCoord[3].Y); gl.Vertex(VertexList[5]);
             // Backward side face
-            gl.Color(My_Color.R, My_Color.G, My_Color.B, alpha);
-            gl.TexCoord(Texture_Coord[0].X, Texture_Coord[0].Y); gl.Vertex(Vertex_List[3]);
-            gl.TexCoord(Texture_Coord[1].X, Texture_Coord[1].Y); gl.Vertex(Vertex_List[2]);
-            gl.TexCoord(Texture_Coord[2].X, Texture_Coord[2].Y); gl.Vertex(Vertex_List[6]);
-            gl.TexCoord(Texture_Coord[3].X, Texture_Coord[3].Y); gl.Vertex(Vertex_List[7]);
+            gl.Color(CurrentColor.R, CurrentColor.G, CurrentColor.B, alpha);
+            gl.TexCoord(TextureCoord[0].X, TextureCoord[0].Y); gl.Vertex(VertexList[3]);
+            gl.TexCoord(TextureCoord[1].X, TextureCoord[1].Y); gl.Vertex(VertexList[2]);
+            gl.TexCoord(TextureCoord[2].X, TextureCoord[2].Y); gl.Vertex(VertexList[6]);
+            gl.TexCoord(TextureCoord[3].X, TextureCoord[3].Y); gl.Vertex(VertexList[7]);
             // End rendering
             gl.End();
 
@@ -226,7 +226,7 @@ namespace SharpGLTexturesSample._3D_Objects
             gl.PopMatrix();
             if (_texturePath != "")
             {
-                _texture.Destroy(gl);
+                _currentTexture.Destroy(gl);
                 gl.Disable(OpenGL.GL_TEXTURE_2D);
             }
             // Get the lastest matrix we save in previous step
@@ -235,10 +235,10 @@ namespace SharpGLTexturesSample._3D_Objects
 
             // If this object is choosen, render its border
             if (this.IsChoose == true)
-                this.draw_Border(gl, 0);
+                this.drawBorder(gl, 0);
         }
 
-        public void draw_Border(OpenGL gl, int type)
+        public void drawBorder(OpenGL gl, int type)
         {
             // Save current matrix
             gl.PushMatrix();
@@ -254,32 +254,32 @@ namespace SharpGLTexturesSample._3D_Objects
             // Set color for border line
             gl.Color(1.0f, 0f, 0f);
             // Render lines at the bottom face
-            gl.Vertex(Vertex_List[0]);
-            gl.Vertex(Vertex_List[1]);
-            gl.Vertex(Vertex_List[1]);
-            gl.Vertex(Vertex_List[2]);
-            gl.Vertex(Vertex_List[2]);
-            gl.Vertex(Vertex_List[3]);
-            gl.Vertex(Vertex_List[3]);
-            gl.Vertex(Vertex_List[0]);
+            gl.Vertex(VertexList[0]);
+            gl.Vertex(VertexList[1]);
+            gl.Vertex(VertexList[1]);
+            gl.Vertex(VertexList[2]);
+            gl.Vertex(VertexList[2]);
+            gl.Vertex(VertexList[3]);
+            gl.Vertex(VertexList[3]);
+            gl.Vertex(VertexList[0]);
             // Render lines at the top face
-            gl.Vertex(Vertex_List[4]);
-            gl.Vertex(Vertex_List[5]);
-            gl.Vertex(Vertex_List[5]);
-            gl.Vertex(Vertex_List[6]);
-            gl.Vertex(Vertex_List[6]);
-            gl.Vertex(Vertex_List[7]);
-            gl.Vertex(Vertex_List[7]);
-            gl.Vertex(Vertex_List[4]);
+            gl.Vertex(VertexList[4]);
+            gl.Vertex(VertexList[5]);
+            gl.Vertex(VertexList[5]);
+            gl.Vertex(VertexList[6]);
+            gl.Vertex(VertexList[6]);
+            gl.Vertex(VertexList[7]);
+            gl.Vertex(VertexList[7]);
+            gl.Vertex(VertexList[4]);
             // Render side face's lines
-            gl.Vertex(Vertex_List[0]);
-            gl.Vertex(Vertex_List[4]);
-            gl.Vertex(Vertex_List[1]);
-            gl.Vertex(Vertex_List[5]);
-            gl.Vertex(Vertex_List[2]);
-            gl.Vertex(Vertex_List[6]);
-            gl.Vertex(Vertex_List[3]);
-            gl.Vertex(Vertex_List[7]);
+            gl.Vertex(VertexList[0]);
+            gl.Vertex(VertexList[4]);
+            gl.Vertex(VertexList[1]);
+            gl.Vertex(VertexList[5]);
+            gl.Vertex(VertexList[2]);
+            gl.Vertex(VertexList[6]);
+            gl.Vertex(VertexList[3]);
+            gl.Vertex(VertexList[7]);
             // End rendering
             gl.End();
             gl.Flush();
