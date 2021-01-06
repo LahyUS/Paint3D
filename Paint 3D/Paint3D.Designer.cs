@@ -99,7 +99,10 @@ namespace Paint3D
             // btnColorPicker
             // 
             this.btnColorPicker.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnColorPicker.BackgroundImage = global::Paint3D.Properties.Resources.color_button;
+            this.btnColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnColorPicker.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnColorPicker.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnColorPicker.Location = new System.Drawing.Point(9, 30);
             this.btnColorPicker.Name = "btnColorPicker";
             this.btnColorPicker.Size = new System.Drawing.Size(120, 23);
@@ -381,6 +384,8 @@ namespace Paint3D
             // btnLoadTexture
             // 
             this.btnLoadTexture.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnLoadTexture.BackgroundImage = global::Paint3D.Properties.Resources.T1;
+            this.btnLoadTexture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLoadTexture.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLoadTexture.ForeColor = System.Drawing.Color.White;
             this.btnLoadTexture.Location = new System.Drawing.Point(9, 74);
@@ -412,6 +417,7 @@ namespace Paint3D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::Paint3D.Properties.Resources.dark_background;
             this.ClientSize = new System.Drawing.Size(1260, 749);
             this.Controls.Add(this.gbDecoration);
             this.Controls.Add(this.object_list);
