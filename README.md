@@ -11,7 +11,7 @@ Paint3D is a 3D graphics demonstration application developed in C# using SharpGL
 - Apply texture mapping
 
 ## Demo
-![Demo Image](demo.png)
+![Demo Image](Demo.png)
 
 ## Installation
 
